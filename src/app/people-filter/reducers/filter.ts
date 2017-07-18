@@ -2,11 +2,14 @@ export function filter(state = person => person, action) {
 
   switch (action.type) {
     case "SHOW_ATTENDING":
-      return person => person.attending;
+      return (person) => person.attending;
+
     case "SHOW_ALL":
-      return person => person;
+      return (person) => person;
+
     case "SHOW_WITH_GUESTS":
-      return person => person.guests;
+      return (person) => person.guests;
+
     default:
       return state;
   }

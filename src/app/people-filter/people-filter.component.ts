@@ -7,21 +7,17 @@ import { filter } from './reducers/filter';
 // import { Observable } from 'rxjs/Observable';
 import { Observable } from 'rxjs/rx' // <-- TODO fix for combineLatest method
 
-import 'rxjs/add/operator/combineLatest';
-import 'rxjs/observable/combineLatest';
-
 @Component({
   selector: 'people-filter',
   template: `
     <h3>Party Planner</h3>
     <filter-select (updateFilter)='updateFilter($event)'></filter-select>
     <person-input (addPerson)='addPerson($event)'></person-input>
-    <person-list
-        [people]='people_f | async'
-        (addGuest)='addGuest($event)'
-        (removeGuest)='removeGuest($event)'
-        (removePerson)='removePerson($event)'
-        (toggleAttending)='toggleAttending($event)'>
+    <person-list [people]='people_f | async'
+                 (addGuest)='addGuest($event)'
+                 (removeGuest)='removeGuest($event)'
+                 (removePerson)='removePerson($event)'
+                 (toggleAttending)='toggleAttending($event)'>
     </person-list>
   `
 })
@@ -30,13 +26,17 @@ export class PeopleFilterComponent {
   private id = 0;
 
   constructor(private _store: Store<any>) {
+    // this.people_f =  _store.select('people_f');
+
     this.people_f = Observable.combineLatest(
       _store.select('people_f'), // the same as _store.map((state) => state[people_f]).distinctUntilChanged();
       _store.select('filter'),
       (people_f: any[], filter) => {
+        console.log(people_f, filter.toString());
         return people_f.filter(filter as any);
       }
     )
+
   }
 
   addPerson(name) {

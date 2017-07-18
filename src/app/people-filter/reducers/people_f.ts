@@ -1,12 +1,15 @@
 export function people_f(state = [], action) {
+
   switch (action.type) {
     case "ADD_PERSON":
       return [
         ...state,
         action.payload
       ];
+
     case "REMOVE_PERSON":
       return state.filter(person => person.id !== action.payload);
+
     case "ADD_GUESTS":
       return state.map(person => {
         if (person.id === action.payload) {
@@ -16,6 +19,7 @@ export function people_f(state = [], action) {
         }
         return person;
       });
+
     case "REMOVE_GUESTS":
       return state.map(person => {
         if (person.id === action.payload) {
@@ -25,6 +29,7 @@ export function people_f(state = [], action) {
         }
         return person;
       });
+
     case "TOGGLE_ATTENDING":
       return state.map(person => {
         if (person.id === action.payload) {
@@ -38,4 +43,5 @@ export function people_f(state = [], action) {
     default:
       return state;
   }
+
 }
