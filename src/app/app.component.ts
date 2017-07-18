@@ -7,7 +7,7 @@ import 'rxjs/add/operator/mapTo'
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store'
-import { HOUR, SECOND } from "./state-management/reducers/reducers";
+import { HOUR, SECOND } from './state-management/reducers/reducers';
 
 @Component({
   selector: 'app-root',
@@ -26,9 +26,11 @@ export class AppComponent {
     .mapTo({ type: SECOND, payload: 1 });
 
   time: any;
+  people: any;
 
   constructor(store: Store<any>) {
     this.time = store.select('clock');
+    this.people = store.select('people');
 
     Observable.merge(this.click$$, this.seconds$)
       .subscribe(store.dispatch.bind(store))
