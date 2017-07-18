@@ -5,5 +5,5 @@
 </div>
 
 <div *ngFor="let person of people | async">
-  {{person.name}} is in {{person.time}}
+  {{person.name}} is in {{person.time | date: 'jms'}}
 </div>
