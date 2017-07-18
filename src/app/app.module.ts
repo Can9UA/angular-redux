@@ -2,17 +2,15 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { AppStoreModule } from './state-management/store';
-import { ClockComponent } from './clock/clock.component';
+import { PersonsTimeModule } from './persons-time/persons-time.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    ClockComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
-    AppStoreModule
+    PersonsTimeModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
