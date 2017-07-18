@@ -7,7 +7,13 @@ import 'rxjs/add/operator/mapTo'
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store'
-import { HOUR, SECOND, ADVANCE } from './state-management/reducers/reducers';
+import {
+  HOUR,
+  SECOND,
+  ADVANCE,
+  RECALL
+} from './state-management/reducers/reducers';
+import 'rxjs/add/operator/withLatestFrom';
 
 @Component({
   selector: 'app-root',
@@ -35,6 +41,8 @@ export class AppComponent {
     };
   })
 
+  recall$$ = new Subject();
+
   constructor(store: Store<any>) {
     this.time = store.select('clock');
     this.people = store.select('people');
@@ -42,9 +50,16 @@ export class AppComponent {
     Observable.merge(
       this.click$$,
       this.seconds$,
-      this.person$$
+      this.person$$,
+      this.recall$$.withLatestFrom(this.time, (x, y) => y)
+        .map((time) => {
+          return {
+            type: RECALL,
+            payload: time
+          };
+        })
     )
       .subscribe(store.dispatch.bind(store))
-      // .subscribe((action) => { store.dispatch(action) });
+    // .subscribe((action as any) => { store.dispatch(action) });
   }
 }

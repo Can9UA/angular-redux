@@ -5,5 +5,4 @@ import { clock, people } from './reducers/reducers';
 @NgModule({
   imports: [StoreModule.provideStore({ clock, people })]
 })
-export class AppStoreModule {
-}
+export class AppStoreModule {}

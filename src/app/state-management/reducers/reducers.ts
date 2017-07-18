@@ -1,7 +1,10 @@
 export const HOUR = 'HOUR'
 export const SECOND = 'SECOND'
 
-export const clock = (state = new Date(), { type, payload } = { type: '', payload: 0}) => {
+export const clock = (
+  state = new Date(),
+  { type, payload } = { type: '', payload: 0}
+) => {
   const date = new Date(state.getTime())
 
   switch (type) {
@@ -19,11 +22,12 @@ export const clock = (state = new Date(), { type, payload } = { type: '', payloa
 }
 
 export const ADVANCE = 'ADVANCE';
+export const RECALL = 'RECALL';
 const defaultPeople = [
-  {name: 'A', time: clock()},
-  {name: 'B', time: clock()},
-  {name: 'C', time: clock()},
-  {name: 'D', time: clock()},
+  {name: 'Alan', time: clock()},
+  {name: 'Bob', time: clock()},
+  {name: 'Charon', time: clock()},
+  {name: 'Dino', time: clock()},
 ];
 export const people = (state = defaultPeople, { type, payload }) => {
   switch (type) {
@@ -37,6 +41,14 @@ export const people = (state = defaultPeople, { type, payload }) => {
         }
 
         return person;
+      })
+
+    case RECALL:
+      return state.map((person) => {
+        return {
+          name: person.name,
+          time: payload
+        }
       })
 
     default:

@@ -4,7 +4,10 @@
   <input #inputNum type="number" value="0">
 </div>
 
-<div *ngFor="let person of people | async"
-      (click)="person$$.next(person)">
+<div *ngFor="let person of people | async">
   {{person.name}} is in {{person.time | date: 'jms'}}
+  <button  (click)="person$$.next(person)">Add a couple of hour</button>
 </div>
+
+<button (click)="recall$$.next(inputNum.value)">Recall</button>
+
