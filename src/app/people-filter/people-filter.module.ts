@@ -11,7 +11,7 @@ import { people_f } from './reducers/people_f';
 @NgModule({
   imports: [
     CommonModule,
-    StoreModule.provideStore({ people_f, filter_f })
+
   ],
   declarations: [PeopleFilterComponent, FilterSelectComponent, PersonInputComponent, PersonListComponent],
   exports: [PeopleFilterComponent]
