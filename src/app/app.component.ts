@@ -22,11 +22,11 @@ export class AppComponent {
     this.clock = store.select('clock');
 
     Observable.merge(
-        this.click$$.mapTo(HOUR), // will update when press the button (add 1 hour)
-        Observable.interval(1000).mapTo(SECOND) // will automatically updated every 1 seconds (add 1 sec)
+        this.click$$.mapTo({ type: HOUR, payload: 2 }), // add 2 hours
+        Observable.interval(1000).mapTo({ type: SECOND, payload: 1 })
       )
-      .subscribe((type)=>{
-        store.dispatch({type})
+      .subscribe((action) => {
+        store.dispatch(action)
       })
   }
 }
