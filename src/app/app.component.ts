@@ -3,10 +3,10 @@ import 'rxjs/add/observable/interval';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/fromEvent';
 import 'rxjs/add/observable/merge';
+import 'rxjs/add/operator/mapTo'
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/startWith';
-import 'rxjs/add/operator/scan';
+import { Store } from '@ngrx/store'
 
 @Component({
   selector: 'app-root',
@@ -15,21 +15,17 @@ import 'rxjs/add/operator/scan';
 })
 export class AppComponent {
   click$$ = new Subject();
-  clock$: Observable<Date>;
+  clock: any;
 
-  constructor() {
-    this.clock$ = Observable.merge(
-        this.click$$, // will update when press the button
-        Observable.interval(1000) // will automatically updated every 1 seconds
+  constructor(store: Store<any>) {
+    this.clock = store.select('clock');
+
+    Observable.merge(
+        this.click$$.mapTo('hour'), // will update when press the button (add 1 hour)
+        Observable.interval(1000).mapTo('second') // will automatically updated every 1 seconds (add 1 sec)
       )
-      .startWith(new Date())
-      .scan((accumulator: Date, curr) => {
-        const date = new Date(accumulator.getTime());
-
-        date.setSeconds(date.getSeconds() + 1);
-
-        return date;
-      });
-
+      .subscribe((type)=>{
+        store.dispatch({type})
+      })
   }
 }

@@ -1,6 +1,6 @@
 <div style="text-align:center">
   <h1>
-   {{clock$ | async | date:'y MMMM EEEE djms'}}
+   {{clock | async | date: 'yMMMdjms'}}
   </h1>
-  <button (click)="click$$.next()">Update</button>
+  <button (click)="click$$.next()">Add hour</button>
 </div>
