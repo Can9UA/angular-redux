@@ -59,7 +59,7 @@ export class AppComponent {
           };
         })
     )
-      .subscribe(store.dispatch.bind(store))
-    // .subscribe((action as any) => { store.dispatch(action) });
+      // .subscribe((action) => { store.dispatch(action as any) });
+      .subscribe(store.dispatch.bind(store));
   }
 }
