@@ -18,6 +18,7 @@ export const clock = (state = new Date(), { type, payload } = { type: '', payloa
   }
 }
 
+export const ADVANCE = 'ADVANCE';
 const defaultPeople = [
   {name: 'A', time: clock()},
   {name: 'B', time: clock()},
@@ -26,6 +27,18 @@ const defaultPeople = [
 ];
 export const people = (state = defaultPeople, { type, payload }) => {
   switch (type) {
+    case ADVANCE:
+      return state.map((person) => {
+        if (payload === person) {
+          return {
+            name: person.name,
+            time: clock(person.time, { type: HOUR, payload: 4 })
+          }
+        }
+
+        return person;
+      })
+
     default:
       return state
   }

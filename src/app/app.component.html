@@ -4,6 +4,7 @@
   <input #inputNum type="number" value="0">
 </div>
 
-<div *ngFor="let person of people | async">
+<div *ngFor="let person of people | async"
+      (click)="person$$.next(person)">
   {{person.name}} is in {{person.time | date: 'jms'}}
 </div>
