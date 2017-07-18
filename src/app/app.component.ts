@@ -15,7 +15,14 @@ import { HOUR, SECOND } from "./state-management/reducers/reducers";
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  click$$ = new Subject().mapTo({ type: HOUR, payload: 2 });
+  click$$: any = new Subject()
+    .map((inpValue) => {
+      return {
+        type: HOUR,
+        payload: parseInt(inpValue as string, 10)
+      };
+    });
+
   seconds$ = Observable.interval(1000)
     .mapTo({ type: SECOND, payload: 1 });
 
@@ -26,8 +33,6 @@ export class AppComponent {
 
     Observable.merge(this.click$$, this.seconds$)
       .subscribe(store.dispatch.bind(store))
-      // .subscribe((action) => {
-      //   store.dispatch(action)
-      // });
+      // .subscribe((action) => { store.dispatch(action) });
   }
 }

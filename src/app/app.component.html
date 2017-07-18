@@ -2,5 +2,6 @@
   <h1>
    {{clock | async | date: 'yMMMdjms'}}
   </h1>
-  <button (click)="click$$.next()">Add hour</button>
+  <button (click)="click$$.next(inputNum.value)">Add hour</button>
+  <input #inputNum type="number" value="0">
 </div>
