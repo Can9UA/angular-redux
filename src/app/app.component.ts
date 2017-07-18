@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/interval';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/observable/fromEvent';
+import 'rxjs/add/observable/merge';
+import { Subject } from 'rxjs/Subject';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-root',
@@ -9,10 +12,13 @@ import 'rxjs/add/operator/map';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  clock = Observable.interval(1000)
-                    .map(() => new Date());
+  click$$ = new Subject();
+  clock$: Observable<Date>;
 
   constructor() {
-    this.clock.subscribe((i) => console.log(i));
+    this.clock$ = Observable.merge(
+      this.click$$, // will update when press the button
+      Observable.interval(5000) // will automatically updated every 5 seconds
+    ).map(() => new Date());
   }
 }
