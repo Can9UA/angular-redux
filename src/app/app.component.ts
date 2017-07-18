@@ -11,8 +11,7 @@ import { HOUR, SECOND } from "./state-management/reducers/reducers";
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  templateUrl: './app.component.html'
 })
 export class AppComponent {
   click$$: any = new Subject()
@@ -26,10 +25,10 @@ export class AppComponent {
   seconds$ = Observable.interval(1000)
     .mapTo({ type: SECOND, payload: 1 });
 
-  clock: any;
+  time: any;
 
   constructor(store: Store<any>) {
-    this.clock = store.select('clock');
+    this.time = store.select('clock');
 
     Observable.merge(this.click$$, this.seconds$)
       .subscribe(store.dispatch.bind(store))
