@@ -5,7 +5,7 @@ import { FilterSelectComponent } from './components/filter-select';
 import { PersonInputComponent } from './components/person-input';
 import { PersonListComponent } from './components/person-list';
 import { StoreModule } from '@ngrx/store'
-import { filter_f } from './reducers/filter_f';
+import { filter } from './reducers/filter';
 import { people_f } from './reducers/people_f';
 
 @NgModule({

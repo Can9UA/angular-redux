@@ -10,7 +10,7 @@ import { StoreModule } from '@ngrx/store';
 import { clock, people } from './persons-time/state-management/reducers';
 
 import { people_f } from './people-filter/reducers/people_f';
-import { filter_f } from './people-filter/reducers/filter_f';
+import { filter } from './people-filter/reducers/filter';
 
 @NgModule({
   declarations: [
@@ -26,7 +26,7 @@ import { filter_f } from './people-filter/reducers/filter_f';
       clock,
       //example 2
       people_f,
-      filter_f
+      filter
     })
   ],
   providers: [],

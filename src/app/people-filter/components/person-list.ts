@@ -9,10 +9,9 @@ import {
   selector: 'person-list',
   template: `
     <ul>
-      <li
-          *ngFor="let person of people"
-          [class.attending]="person.attending"
-      >
+      <li *ngFor="let person of people"
+          [class.attending]="person.attending">
+        
         {{person.name}} - Guests: {{person.guests}}
         
         <button (click)="addGuest.emit(person)">+</button>

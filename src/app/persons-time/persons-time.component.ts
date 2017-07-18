@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
-import 'rxjs/add/Observable/interval';
-import 'rxjs/add/Observable/merge';
+import 'rxjs/add/observable/interval';
+import 'rxjs/add/observable/merge';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/withLatestFrom';
 import 'rxjs/add/operator/mapTo';

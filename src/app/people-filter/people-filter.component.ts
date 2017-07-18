@@ -2,14 +2,13 @@ import { Component } from '@angular/core';
 
 import { Store } from '@ngrx/store';
 import { people_f } from './reducers/people_f';
-import { filter_f } from './reducers/filter_f';
+import { filter } from './reducers/filter';
 
-import { Observable } from 'rxjs/Observable';
+// import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs/rx' // <-- TODO fix for combineLatest method
+
 import 'rxjs/add/operator/combineLatest';
 import 'rxjs/observable/combineLatest';
-import 'rxjs/src/operator/combineLatest'
-import 'rxjs/add/operator/startWith';
-
 
 @Component({
   selector: 'people-filter',
@@ -31,11 +30,11 @@ export class PeopleFilterComponent {
   private id = 0;
 
   constructor(private _store: Store<any>) {
-    this.people_f = Observable.merge(
-      _store.select('people_f'),
-      _store.select('filter_f'),
-      (people_f: any[], filter_f) => {
-        return people_f.filter(filter_f);
+    this.people_f = Observable.combineLatest(
+      _store.select('people_f'), // the same as _store.map((state) => state[people_f]).distinctUntilChanged();
+      _store.select('filter'),
+      (people_f: any[], filter) => {
+        return people_f.filter(filter as any);
       }
     )
   }
@@ -79,7 +78,7 @@ export class PeopleFilterComponent {
     });
   }
 
-  updateFilter(filter_f) {
-    this._store.dispatch({ type: filter_f });
+  updateFilter(filter) {
+    this._store.dispatch({ type: filter });
   }
 }

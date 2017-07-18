@@ -19,7 +19,7 @@ import {
   `
 })
 export class FilterSelectComponent {
-  public filters = [
+  filters = [
     { friendly: "All", action: 'SHOW_ALL' },
     { friendly: "Attending", action: 'SHOW_ATTENDING' },
     { friendly: "Guests", action: 'SHOW_WITH_GUESTS' }

@@ -1,4 +1,5 @@
-export function filter_f(state = person => person, action) {
+export function filter(state = person => person, action) {
+
   switch (action.type) {
     case "SHOW_ATTENDING":
       return person => person.attending;
@@ -9,4 +10,5 @@ export function filter_f(state = person => person, action) {
     default:
       return state;
   }
+
 }
