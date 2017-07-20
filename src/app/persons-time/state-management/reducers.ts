@@ -1,5 +1,5 @@
-export const HOUR = 'HOUR'
-export const SECOND = 'SECOND'
+export const HOUR = 'HOUR';
+export const SECOND = 'SECOND';
 
 export function clock(state = new Date(), { type, payload } = { type: '', payload: 0 }) {
   const date = new Date(state.getTime())
@@ -26,7 +26,7 @@ const defaultPeople = [
   {name: 'Charon', time: clock()},
   {name: 'Dino', time: clock()},
 ];
-export function people (state = defaultPeople, { type, payload }) {
+export function people(state = defaultPeople, { type, payload }) {
   switch (type) {
     case ADVANCE:
       return state.map((person) => {
