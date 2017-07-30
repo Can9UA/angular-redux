@@ -1,20 +1,20 @@
 export const HOUR = 'HOUR';
 export const SECOND = 'SECOND';
 
-export function clock(state = new Date(), { type, payload } = { type: '', payload: 0 }) {
-  const date = new Date(state.getTime())
+declare type Time = Date | number;
+
+export function clock(state: Time = new Date(), { type, payload } = { type: '', payload: 0 }): Time {
+  const date: Date = (state instanceof Date) ? new Date(state.getTime()) : new Date();
 
   switch (type) {
     case SECOND:
-      date.setSeconds(date.getSeconds() + payload)
-      return date
+      return date.setSeconds(date.getSeconds() + payload);
 
     case HOUR:
-      date.setHours(date.getHours() + payload)
-      return date
+      return date.setHours(date.getHours() + payload);
 
     default:
-      return state
+      return state;
   }
 }
 
@@ -34,21 +34,21 @@ export function people(state = defaultPeople, { type, payload }) {
           return {
             name: person.name,
             time: clock(person.time, { type: HOUR, payload: 4 })
-          }
+          };
         }
 
         return person;
-      })
+      });
 
     case RECALL:
       return state.map((person) => {
         return {
           name: person.name,
           time: payload
-        }
-      })
+        };
+      });
 
     default:
-      return state
+      return state;
   }
 }

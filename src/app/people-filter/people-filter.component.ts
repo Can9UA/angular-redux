@@ -41,7 +41,8 @@ export class PeopleFilterComponent {
 
   addPerson(name) {
     this._store.dispatch({
-      type: 'ADD_PERSON', payload: {
+      type: 'ADD_PERSON',
+      payload: {
         id: ++this.id,
         name,
         guests: 0,
