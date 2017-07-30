@@ -47,10 +47,5 @@ export class SearchComponent {
 
   onSearch(term: string) {
     this.store.dispatch(new SearchActions.Search(term));
-
-    this.booksService.searchBooks(term)
-      .subscribe(books => {
-        this.store.dispatch(new SearchActions.SearchSuccess(books));
-      });
   }
 }

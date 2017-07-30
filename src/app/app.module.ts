@@ -11,6 +11,9 @@ import { SearchComponent } from './search/search.component';
 import { BooksService } from './books.service';
 import { CounterComponent } from './counter/counter.component';
 
+import { EffectsModule } from '@ngrx/effects';
+import { BookEffects } from './book-effects';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +23,8 @@ import { CounterComponent } from './counter/counter.component';
   imports: [
     BrowserModule,
     StoreModule.provideStore(reducers),
-    StoreDevtoolsModule.instrumentOnlyWithExtension()
+    StoreDevtoolsModule.instrumentOnlyWithExtension(),
+    EffectsModule.run(BookEffects)
   ],
   providers: [BooksService],
   bootstrap: [AppComponent]
