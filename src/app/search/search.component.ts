@@ -41,13 +41,8 @@ export class SearchComponent {
   ) {
     this.termsVariants = this.booksService.getTerms();
 
-    // variant 1
-    // this.terms = store.select(state => state.search.searchTerms);
-    // this.books = store.select(state => state.search.results);
-
-    // ovariant 2
-    this.terms = store.select(state => fromRoot.selectTerms(state));
-    this.books = store.select(state => fromRoot.selectResults(state));
+    this.terms = store.select(fromRoot.selectTerms);
+    this.books = store.select(fromRoot.selectResults);
   }
 
   onSearch(term: string) {

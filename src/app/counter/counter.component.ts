@@ -12,8 +12,6 @@ export class CounterComponent {
   count: Observable<number>;
 
   constructor(private store: Store<fromRoot.State>) {
-    // this.count = store.select(state => state.search.results.length);
-    // ovariant 2
-    this.count = store.select(state => fromRoot.selectCount(state));
+    this.count = store.select(fromRoot.selectCount);
   }
 }
