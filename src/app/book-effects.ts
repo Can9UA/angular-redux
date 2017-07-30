@@ -11,11 +11,23 @@ import * as SearchActions from './search-actions';
 @Injectable()
 export class BookEffects {
   @Effect()
-  search$: Observable<Action> = this.actions$.ofType(SearchActions.SEARCH)
-    .map((action: SearchActions.SearchAction) => action.payload)
-    .switchMap(terms => this.booksService.searchBooks(terms))
-    .map(results => new SearchActions.SearchSuccessAction(results));
+  search$: Observable<Action> = this.actions$
+    .ofType(SearchActions.SEARCH) // следить за экшеном с типом '[Books] Search'
+    .map((action: SearchActions.SearchAction) => action.payload) // получим payload из этого экшена
+    .switchMap(terms => this.booksService.searchBooks(terms)) // отправим запрос на получение данных
+    .map(results => new SearchActions.SearchSuccessAction(results)); // при удачном завершении запроса вызовем SearchSuccessAction
 
+  /*
+  * SearchSuccessAction
+  * запишет в payload книги constructor(public payload: Book[])
+  * а затем мы получим их
+  * store.select(fromRoot.selectResults)
+  * или store.select(state => state.search.results)
+  *
+  * reducers = {
+  *   search: fromSearch.reducer
+  * };
+  * */
   constructor(
     private actions$: Actions,
     private booksService: BooksService
