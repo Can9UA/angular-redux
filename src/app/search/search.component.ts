@@ -8,10 +8,6 @@ import * as fromRoot from '../reducers';
 import { Observable } from 'rxjs/Observable';
 import { Book } from '../book-model';
 import { BooksService } from '../books.service';
-import {
-  selectCount, selectResults,
-  selectTerms
-} from '../reducers';
 
 @Component({
   selector: 'search',
@@ -52,9 +48,9 @@ export class SearchComponent {
     // this.count = store.select(state => state.search.results.length);
 
     // ovariant 2
-    this.terms = store.select(state => selectTerms(state));
-    this.books = store.select(state => selectResults(state));
-    this.count = store.select(state => selectCount(state));
+    this.terms = store.select(state => fromRoot.selectTerms(state));
+    this.books = store.select(state => fromRoot.selectResults(state));
+    this.count = store.select(state => fromRoot.selectCount(state));
   }
 
   onSearch(term: string) {
