@@ -46,6 +46,6 @@ export class SearchComponent {
   }
 
   onSearch(term: string) {
-    this.store.dispatch(new SearchActions.Search(term));
+    this.store.dispatch(new SearchActions.SearchAction(term));
   }
 }

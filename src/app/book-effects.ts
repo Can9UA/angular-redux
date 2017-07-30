@@ -12,9 +12,9 @@ import * as SearchActions from './search-actions';
 export class BookEffects {
   @Effect()
   search$: Observable<Action> = this.actions$.ofType(SearchActions.SEARCH)
-    .map((action: SearchActions.Search) => action.payload)
+    .map((action: SearchActions.SearchAction) => action.payload)
     .switchMap(terms => this.booksService.searchBooks(terms))
-    .map(results => new SearchActions.SearchSuccess(results));
+    .map(results => new SearchActions.SearchSuccessAction(results));
 
   constructor(
     private actions$: Actions,
