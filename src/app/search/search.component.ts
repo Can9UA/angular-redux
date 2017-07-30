@@ -20,7 +20,7 @@ import { BooksService } from '../books.service';
       </option>
     </select>
     <h3>Searched by: {{terms | async}}</h3>
-    <h4>Count: {{count | async}}</h4>
+    <counter></counter>
     <ul>
       <li *ngFor="let book of books | async">
         <pre>{{book| json}}</pre>
@@ -32,7 +32,6 @@ import { BooksService } from '../books.service';
 export class SearchComponent {
   terms: Observable<string>;
   books: Observable<Book[]>;
-  count: Observable<number>;
 
   termsVariants: Observable<string[]>;
 
@@ -45,12 +44,10 @@ export class SearchComponent {
     // variant 1
     // this.terms = store.select(state => state.search.searchTerms);
     // this.books = store.select(state => state.search.results);
-    // this.count = store.select(state => state.search.results.length);
 
     // ovariant 2
     this.terms = store.select(state => fromRoot.selectTerms(state));
     this.books = store.select(state => fromRoot.selectResults(state));
-    this.count = store.select(state => fromRoot.selectCount(state));
   }
 
   onSearch(term: string) {

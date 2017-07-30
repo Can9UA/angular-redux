@@ -9,11 +9,13 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { reducers } from './reducers';
 import { SearchComponent } from './search/search.component';
 import { BooksService } from './books.service';
+import { CounterComponent } from './counter/counter.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SearchComponent
+    SearchComponent,
+    CounterComponent
   ],
   imports: [
     BrowserModule,
